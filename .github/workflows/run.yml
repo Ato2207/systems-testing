@@ -1,6 +1,12 @@
 name: cicd-documentation
 
 on:
+  push:
+      branches:
+        - main
+  pull_request:
+      branches:
+        - main
   workflow_dispatch:
 
 jobs:
@@ -13,7 +19,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 🚀 Run
+      - name: ✅ Run unit tests
+        shell: bash
+        run: |
+          cd laboratories/cicd-documentation
+          python3 -m unittest tree_test.py
+
+      - name: 🚀 Run main.py
         shell: bash
         run: |
           cd laboratories/cicd-documentation
